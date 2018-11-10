@@ -1,0 +1,36 @@
+Sending build context to Docker daemon  74.24kB
+Step 1/9 : FROM alpine
+ ---> e21c333399e0
+Step 2/9 : LABEL maintainer "Pavel Serikov <pavelsr@cpan.org>"
+ ---> Using cache
+ ---> bd242173cc23
+Step 3/9 : RUN apk update &&     apk add perl perl-dev g++ make wget curl &&     curl -L https://cpanmin.us | perl - App::cpanminus &&     rm -rf /root/.cpanm/* /usr/local/share/man/*
+ ---> Using cache
+ ---> 0c4bd273700f
+Step 4/9 : RUN apk add mariadb mariadb-dev openssl
+ ---> Using cache
+ ---> 4ac47b5c2404
+Step 5/9 : COPY cpanfile ./
+ ---> Using cache
+ ---> 0539907f54c7
+Step 6/9 : RUN  cpanm -v --installdeps . && rm cpanfile
+ ---> Running in 51d9174af321
+[91mcpanm (App::cpanminus) 1.7044 on perl 5.026002 built for x86_64-linux-thread-multi
+Work directory is /root/.cpanm/work/1541853403.7
+[0m[91mYou have make /usr/bin/make
+[0m[91mYou have /usr/bin/wget
+[0m[91mYou have /bin/tar: tar (busybox) 1.27.2
+[0m[91mYou have /usr/bin/unzip
+[0m[91mEntering /
+[0m[91mChecking if you have Mojolicious::Lite 0 ... [0m[91mNo
+[0m[91mChecking if you have Mojo::UserAgent 0 ... [0m[91mNo
+[0m[91mChecking if you have feature 0 ... [0m[91mYes (1.47)
+[0m[91mChecking if you have Data::Dumper::AutoEncode 0 ... [0m[91mNo
+[0m[91mSearching Mojolicious::Lite (0) on cpanmetadb ...
+[0m--> Working on .
+Configuring / ... OK
+==> Found dependencies: Mojolicious::Lite, Mojo::UserAgent, Data::Dumper::AutoEncode
+[91m--2018-11-10 12:36:43--  http://cpanmetadb.plackperl.org/v1.0/package/Mojolicious::Lite
+Resolving cpanmetadb.plackperl.org... [0m[91m151.101.2.217, 151.101.66.217, 151.101.130.217, ...
+Connecting to cpanmetadb.plackperl.org|151.101.2.217|:80... [0m[91mconnected.
+[0m[91mHTTP request sent, awaiting response... [0m

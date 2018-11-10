@@ -1,0 +1,29 @@
+# compose file for local development
+# docker-compose up then go to http://localhost:3050
+
+version: '2'
+
+services:
+    web:
+        # image: ${DOCKER_HUB_USER}/${DOCKER_NAME}
+        image: pavelsr/bestcar_stat
+        container_name: ${DOCKER_NAME}
+        working_dir: /root/www
+        volumes:
+          - ${PWD}:/root/www/
+        command: [ "morbo", "-v", "EventZilla" ]
+        ports:
+            - "${DEV_PORT}:3000"
+        env_file: .env
+        depends_on:
+            - mysql
+
+    mysql:
+        image: mariadb
+        container_name: ${DOCKER_NAME}_db
+        environment:
+        - MYSQL_DATABASE=${DATABASE}
+        - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+        - TZ=Europe/Moscow
+        volumes:
+        - ${PWD}/sql:/docker-entrypoint-initdb.d
