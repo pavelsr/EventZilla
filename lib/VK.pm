@@ -23,8 +23,8 @@ sub new {
 sub query {
   my ($self, $method, $params) = @_;
 
-  $params->{v} = '5.87';
-  $params->{access_token} = '2259cdc32259cdc32259cdc397226c7b5b222592259cdc379bf9be0d724066c7c88355d';
+  $params->{v} = $ENV{'VK_API_VERSION'};
+  $params->{access_token} = $ENV{'APP_ACCESS_TOKEN'};
 
   my $res = $ua->get($vk_api_endpoint.$method => form => $params)->res; # or ->post if data is higher than 2KB
   # $res = Mojo::Message::Response
