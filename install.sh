@@ -1,1 +1,1 @@
-docker exec -it eventzilla cpanm Data::Dumper::AutoEncode
+docker exec -it eventzilla cpanm Data::Dumper::AutoEncode DBI::Log

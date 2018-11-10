@@ -12,6 +12,9 @@ say "DB User: ".$ENV{'DB_USER'};
 say "DB password: ".$ENV{'DB_PASSWORD'};
 my $dbh = DBI->connect( $dsn, $ENV{'DB_USER'}, $ENV{'DB_PASSWORD'} );
 
+my $vk = VK->new;
+my $group_id = 71991592;
+
 sub insert_user {
   my $row = shift;
   $row->{sex} = 'f' if ( $row->{sex} == 1 );
@@ -29,13 +32,16 @@ sub insert_user {
    print "User inserted";
 }
 
-my $vk = VK->new;
-my $res = $vk->query( 'users.get', {
-    user_id => $ARGV[0] || 4485606,  # Оля: 2606187,
+
+my $res = $vk->query('groups.getMembers', {
+    group_id => $group_id,
     extended => 1,
-    fields => $ENV{'USER_GET_FIELDS'}
-} );
+    fields => $ENV{'USER_GET_FIELDS'},
+    count => 1000 # default
+}); # arrayref
 
-warn eDumper $res;
+for my $row ( @{ $res->{response}{items} }) {
+  insert_user($row);
+}
 
-insert_user($res->{response}->[0]);
+# warn eDumper $res;
