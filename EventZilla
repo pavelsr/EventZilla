@@ -1,10 +1,19 @@
 #!/usr/bin/env perl
 use Mojolicious::Lite;
+use lib 'lib';
+use DB;
 
+helper db => sub {
+  return DB->new();
+};
+
+# e.g.
 get '/' => sub {
   my $c = shift;
-  $c->render(json => 'ok');
+  app->log->info( 'user_id : '.$c->param('user_id') );
+  $c->render( json => $c->db->export_user( user_id => $c->param('user_id') ) );
 };
+
 
 app->start;
 __DATA__

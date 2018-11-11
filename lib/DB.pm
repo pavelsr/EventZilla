@@ -150,7 +150,42 @@ sub insert_user {
    $self->dbh->commit;
 }
 
+# http://127.0.0.1:3100/?user_id=4485606
 
+sub export_user {
+  my ($self, %params) = @_;
 
+  my $user_id = $params{user_id};
+
+  # interests, city, about, status, description
+  my $row = $self->dbh->selectrow_hashref( "SELECT vk_id, vk_interests FROM users WHERE vk_id = $user_id" );
+
+  my $fav_groups = $self->dbh->selectall_arrayref(qq/
+    SELECT vk_name, vk_description FROM groups
+    WHERE vk_id
+    IN ( SELECT group_id FROM subscriptions WHERE user_id = $user_id )
+  /, { Slice => {} } );
+
+  my $fav_group_posts_list = $self->dbh->selectall_arrayref(qq/
+    SELECT owner_id,vk_post_id,text FROM posts
+    WHERE owner_id
+    IN ( SELECT group_id FROM subscriptions WHERE user_id = $user_id )
+  /, { Slice => {} } );
+
+  my $user_posts = $self->dbh->selectall_arrayref(qq/
+    SELECT owner_id,vk_post_id,text FROM posts
+    WHERE owner_id = $user_id/, { Slice => {} }
+    );
+
+  return {
+    vk_id => $row->{vk_id},
+    vk_interests => $row->{vk_interests},
+    vk_all_group_names => join(" ", map { $_->{vk_name} } @$fav_groups ),
+    vk_all_group_descr => join(" ", map { $_->{vk_description} } @$fav_groups ),
+    vk_fav_group_posts_list => join(" ", map { $_->{text} } @$fav_group_posts_list ),
+    vk_own_posts => join(" ", map { $_->{text} } @$user_posts )
+  }
+
+}
 
 1;
