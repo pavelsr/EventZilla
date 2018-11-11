@@ -5,8 +5,8 @@ version: '2'
 
 services:
     web:
-        # image: ${DOCKER_HUB_USER}/${DOCKER_NAME}
-        image: pavelsr/bestcar_stat
+        image: ${DOCKER_HUB_USER}/${DOCKER_NAME}
+        # image: pavelsr/bestcar_stat
         container_name: ${DOCKER_NAME}
         working_dir: /root/www
         volumes:
