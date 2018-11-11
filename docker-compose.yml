@@ -11,7 +11,7 @@ services:
         working_dir: /root/www
         volumes:
           - ${PWD}:/root/www/
-        command: [ "morbo", "-v", "EventZilla" ]
+        command: [ "morbo", "-v", "-w", ".env", "-w", "lib", "EventZilla" ]
         ports:
             - "${DEV_PORT}:3000"
         env_file: .env
@@ -29,3 +29,4 @@ services:
             - "${DB_EXPOSE_PORT}:3306"
         volumes:
         - ${PWD}/sql:/docker-entrypoint-initdb.d
+        - ${PWD}/mysql-data:/var/lib/mysql

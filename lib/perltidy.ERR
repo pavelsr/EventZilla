@@ -1,0 +1,12 @@
+Perltidy version is 20180101
+
+313: for (
+         ^
+314: @{ $first_100->{response}{items} )
+      ^
+314: @{ $first_100->{response}{items} )
+                                      ^
+Found 1 extra '{' between '(' on line 313 and ')' on line 314
+    The most recent un-matched '{' is on line 314
+348:	To see 1 non-critical warnings rerun with -w
+348:	To save a full .LOG file rerun with -g

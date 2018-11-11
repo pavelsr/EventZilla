@@ -8,4 +8,4 @@ CREATE TABLE subscriptions (
   INDEX `user_id` (`user_id`),
   INDEX `group_id` (`group_id`),
   UNIQUE KEY (hash)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci, COMMENT='Подписки пользователей на группы';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci, COMMENT='Подписки пользователей на группы';

@@ -15,4 +15,4 @@ CREATE TABLE users (
   `vk_all_group_descr`  TEXT                                   COMMENT 'названия групп юзера в одну строчку',
   `vk_posts_count`      INT(11)                                COMMENT 'количество постов на стене',
   UNIQUE KEY (vk_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci, COMMENT='Пользователи';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci, COMMENT='Пользователи';

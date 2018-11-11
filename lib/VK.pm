@@ -29,7 +29,10 @@ sub query {
   my $res = $ua->get($vk_api_endpoint.$method => form => $params)->res; # or ->post if data is higher than 2KB
   # $res = Mojo::Message::Response
   if    ($res->is_error)  { die $res->message  }
-  elsif ($res->is_success)    { return $res->json }    # ->{response}
+  elsif ($res->is_success)    {
+    die $res->json->{error} if defined $res->json->{error};
+    return $res->json;
+  }
   elsif ($res->code == 301) { die $res->headers->location }
   else                      { die 'API connection error' }
 }

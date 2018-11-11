@@ -39,3 +39,8 @@ inc/
 /*.bin
 /PrettyOutput.html
 /*xml
+
+
+/*.csv
+/*.ERR
+/mysql-data

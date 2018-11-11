@@ -11,7 +11,7 @@ helper db => sub {
 get '/' => sub {
   my $c = shift;
   app->log->info( 'user_id : '.$c->param('user_id') );
-  $c->render( json => $c->db->export_user( user_id => $c->param('user_id') ) );
+  $c->render( json => $c->db->get_user_preferences( user_id => $c->param('user_id') ) );
 };
 
 

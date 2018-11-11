@@ -14,4 +14,4 @@ CREATE TABLE posts (
   KEY `owner_id` (`owner_id`),
   KEY `created` (`created`),
   UNIQUE KEY (hash)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci, COMMENT='Группы вк';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci, COMMENT='Группы вк';

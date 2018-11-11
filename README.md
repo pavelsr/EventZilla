@@ -28,3 +28,7 @@ users - Пользователи
 
 https://vk.com/dev/objects/user
 https://vk.com/dev/users.get
+
+```
+# groups must be before subscriptions to make FOREIGN KEY WORK
+```
