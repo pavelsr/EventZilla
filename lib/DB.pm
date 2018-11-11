@@ -249,21 +249,9 @@ sub get_user_preferences {
     # s/[\;|\,|\\n\#\@]/ /
 
     my $vk_all_group_names = join( " ", map { $_->{vk_name} } @$fav_groups );
-    $vk_all_group_names =~ s/((?!\p{L}).)/ /;
-
-    my $vk_all_group_descr =
-      join( " ", map { $_->{vk_description} } @$fav_groups );
-    # $vk_all_group_descr =~ s/((?!\p{L}).)/ /;
-    $vk_all_group_descr =~ s/\#/ /;
-
-    # warn $vk_all_group_descr;
-
-    my $vk_fav_group_posts_list =
-      join( " ", map { $_->{vk_description} } @$fav_groups );
-    $vk_fav_group_posts_list =~ s/((?!\p{L}).)/ /;
-
+    my $vk_all_group_descr = join( " ", map { $_->{vk_description} } @$fav_groups );
+    my $vk_fav_group_posts_list = join( " ", map { $_->{text} } @$fav_group_posts_list );
     my $vk_own_posts = join( " ", map { $_->{text} } @$user_posts );
-    $vk_own_posts =~ s/((?!\p{L}).)/ /;
 
     return {
         vk_id                   => $user_id,
